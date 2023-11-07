@@ -4,7 +4,7 @@ var router = express.Router();
 const Trip = require('../models/trips');
 
 
-router.get('/', (req, res) => {
+router.post('/', (req, res) => {
 
 	if(!req.body.departure || !req.body.arrival /*|| !req.body.datedepart*/) {
     res.json({ result: false, error: 'missing or empty fields'});
