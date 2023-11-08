@@ -31,4 +31,21 @@ router.post("/", (req, res) => {
   });
 });
 
+router.post("/newCart", (req, res) => {
+  const newCart = new Cart({
+    departure: req.body.departure,
+    arrival: req.body.arrival,
+    // date: req.body.date,
+    price: req.body.price,
+  });
+  newCart.save().then(() => {
+		res.json('trip ajouté à cart')
+	});
+});
+
+
+
+
+
+
 module.exports = router;
