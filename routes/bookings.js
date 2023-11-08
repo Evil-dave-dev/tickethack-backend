@@ -13,7 +13,7 @@ router.post("/", (req, res) => {
   newBooking.save().then(() => {
     Booking.find().then((data) => {
       if (data.length !== 0) {
-        res.json({ result: true, tripsLength: data.length, trips: data });
+        res.json(data);
       } else {
         res.json({ result: false, error: "no trip found" });
       }
