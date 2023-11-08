@@ -17,7 +17,14 @@ router.post("/", (req, res) => {
   });
 });
 
-
-
+router.post("/id", (req, res) => {
+  Trip.findById(req.body._id).then((data) => {
+    if (data.length !== 0) {
+      res.json({ result: true, trips: data });
+    } else {
+      res.json({ result: false, error: "No trip found." });
+    }
+  });
+});
 
 module.exports = router;
