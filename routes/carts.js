@@ -1,45 +1,34 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const Cart = require('../models/carts');
+const Cart = require("../models/carts");
 
+router.delete("/deleteAll", (req, res) => {
+  Cart.deleteMany().then(() => {
+    res.json("Cart cleared!");
+  });
+});
 
-router.delete('/deleteAll', (req, res) => {
-	
-		Cart.deleteMany().then(() => {
-			res.json('Cart cleared!');
-		}
-	)
-		})
-	;
+router.delete("/deleteOne/:id", (req, res) => {
+  Cart.deleteOne({ _id: req.params.id }).then((data) => {
+    res.json("Trip sup!");
+  });
+});
 
+router.get("/", (req, res) => {
+  Cart.find().then((data) => {
+    res.json(data);
+  });
+});
 
-router.delete('/deleteOne/:id', (req, res) => {
-	
-		Cart.deleteOne({_id: req.params.id}).then(data => {
-			res.json('Trip sup!');
-		}
-	)
-		})
-	;
-
-	
-
-	router.get('/', (req, res) => {
-	
-		Cart.find().then(data => {
-			res.json(data);
-		}
-	)
-	})
-	;
-   
-  
-          
-		
-
-
-
-
+router.post("/", (req, res) => {
+  Cart.find().then((data) => {
+    if (data.length !== 0) {
+      res.json({ result: true, tripsLength: data.length, trips: data });
+    } else {
+      res.json({ result: false, error: "no trip found" });
+    }
+  });
+});
 
 module.exports = router;
