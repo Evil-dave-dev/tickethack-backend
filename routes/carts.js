@@ -25,7 +25,14 @@ router.delete('/deleteOne/:id', (req, res) => {
 
 	
 
-
+	router.get('/', (req, res) => {
+	
+		Cart.find().then(data => {
+			res.json(data);
+		}
+	)
+	})
+	;
    
   
           
